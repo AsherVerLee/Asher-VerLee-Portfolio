@@ -9,3 +9,97 @@ body {
 h1 {
     color: #2c3e50;
 }
+
+.bio-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.bio-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #357cc6;
+}
+
+.bio-text h1 {
+    margin: 0 0 0.5rem 0;
+    color: #357cc6;
+}
+
+button, .card-buttons button, .card-buttons a {
+    background: #357cc6;
+    color: #eaf6fb;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+button:hover, .card-buttons button:hover, .card-buttons a:hover {
+    background: #285a8c;
+    color: #fff;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.project-card {
+    background: #232a36;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.project-card img {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 2rem;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-card h2 {
+    color: #357cc6;
+    margin: 0.5rem 0;
+}
+
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 120px;
+    align-items: flex-start;
+}
+
+hr {
+    border: none;
+    border-top: 1.5px solid #357cc6;
+    margin: 2rem 0;
+}
