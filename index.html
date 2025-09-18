@@ -3,13 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML and CSS learning Project</title>
+    <title>Asher's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to Asher's Code Portfolio</h1>
-    <p>This will be a site to link all of my projects, with their own pages showcasing each project.</p> 
-    <hr>
-    <button onclick="window.location.href='project1.html'">930 Circuitpilot</button>
+    <nav class="navbar">
+        <div class="nav-logo">Asher</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li class="dropdown">
+                <a href="#projects">Projects</a>
+                <ul class="dropdown-content">
+                    <li><a href="#personal-projects">Personal</a></li>
+                    <li><a href="#school-projects">School</a></li>
+                    <li><a href="#hunch-projects">HUNCH</a></li>
+                </ul>
+            </li>
+            <li><a href="#about">About/Contact</a></li>
+        </ul>
+    </nav>
+    <header class="banner" id="home">
+        <h1 class="banner-title">[Havent decided on title yet]</h1>
+        <p class="banner-subtitle">A professional, personal portfolio (finally)</p>
+    </header>
+    <main>
+        <section class="landing-section">
+            <div class="featured-cards">
+                <a class="featured-card" href="personal-projects.html">
+                    <img class="card-img" src="images/personal-logo.png" alt="Personal Projects Logo">
+                    <h2>Personal Projects</h2>
+                    <p>Code, robotics (Team 930), and more.</p>
+                </a>
+                <a class="featured-card" href="school-projects.html">
+                    <img class="card-img" src="images/school-logo.png" alt="School Projects Logo">
+                    <h2>School Projects</h2>
+                    <p>YouTube, school code, fabrication, and more.</p>
+                </a>
+                <a class="featured-card" href="hunch-projects.html">
+                    <img class="card-img" src="images/hunch-logo.png" alt="NASA HUNCH Projects Logo">
+                    <h2>NASA HUNCH Projects</h2>
+                    <p>Dedicated NASA HUNCH work and highlights.</p>
+                </a>
+            </div>
+        </section>
+        <section class="bio-contact-section" id="about">
+            <div class="bio-pic-container">
+                <img src="https://via.placeholder.com/120" alt="Your photo" class="bio-pic">
+            </div>
+            <div class="bio-text">
+                <h2>About Me</h2>
+                <p>[need to write a bio about myself]</p>
+                <div class="contact-info">
+                    <p>Email: <a href="mailto:asher.verlee@gmail.com">asher.verlee@gmail.com</a></p>
+                    <p>GitHub: <a href="https://github.com/AsherVerLee" target="_blank">AsherVerLee Github</a></p>
+                    <p>LinkedIn: <a href="#" target="_blank">[Need to make my linkedin soon XD]</a></p>
+                </div>
+            </div>
+            <!-- Gallery/Showcase? -->
+            <div class="gallery">
+                <!-- eventually Add thumbnails or links here -->
+            </div>
+        </section>
+    </main>
 </body>
 </html>

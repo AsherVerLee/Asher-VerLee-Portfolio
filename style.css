@@ -1,9 +1,10 @@
 /* Simple CSS codebase */
 body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #181c24;
+    color: #eaf6fb;
     margin: 0;
-    padding: 2rem;
+    padding: 0;
 }
 
 h1 {
@@ -22,7 +23,7 @@ h1 {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #357cc6;
+    border: 3px solid #356cc6;
 }
 
 .bio-text h1 {
@@ -102,4 +103,192 @@ hr {
     border: none;
     border-top: 1.5px solid #357cc6;
     margin: 2rem 0;
+}
+
+/* Base dark mode and accent setup for new design */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #181c24;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+.nav-logo {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #356cc6;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+.nav-links a {
+    color: #eaf6fb;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: box-shadow 0.2s, color 0.2s;
+}
+.nav-links a:hover, .nav-links .active {
+    color: #356cc6;
+    box-shadow: 0 0 8px #356cc6;
+}
+.nav-links li {
+    position: relative;
+}
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #232a36;
+    min-width: 140px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    border-radius: 8px;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+}
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+    display: block;
+}
+.dropdown-content li {
+    padding: 0.5rem 1rem;
+}
+.dropdown-content a {
+    color: #eaf6fb;
+    display: block;
+}
+.dropdown-content a:hover {
+    color: #356cc6;
+    background: #232a36;
+}
+
+.banner {
+    margin-top: 3.5rem;
+    padding: 3rem 1rem 2rem 1rem;
+    background: linear-gradient(120deg, #181c24 60%, #232a36 100%);
+    text-align: center;
+    border-bottom: 1.5px solid #232a36;
+}
+.banner-title {
+    font-size: 2.5rem;
+    color: #eaf6fb;
+    margin-bottom: 0.5rem;
+}
+.banner-subtitle {
+    color: #b0c4de;
+    font-size: 1.2rem;
+}
+
+.landing-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0 1rem 0;
+}
+.featured-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.featured-card {
+    background: #232a36;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    padding: 2rem 1.5rem;
+    min-width: 220px;
+    max-width: 260px;
+    text-align: center;
+    color: #eaf6fb;
+    text-decoration: none;
+    transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.featured-card:hover {
+    border: 2px solid #356cc6;
+    box-shadow: 0 0 16px #356cc644;
+    transform: translateY(-4px) scale(1.03);
+}
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.featured-card img.card-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background: #232a36;
+}
+
+.bio-contact-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1rem 2rem 1rem;
+    background: #181c24;
+    border-top: 1.5px solid #232a36;
+}
+.bio-pic-container {
+    flex: 0 0 140px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.bio-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #356cc6;
+}
+.bio-text {
+    max-width: 400px;
+}
+.bio-text h2 {
+    color: #356cc6;
+    margin-top: 0;
+}
+.contact-info a {
+    color: #356cc6;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+.contact-info a:hover {
+    text-decoration: underline;
+}
+.gallery {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .featured-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .bio-contact-section {
+        flex-direction: column;
+        align-items: center;
+    }
 }
