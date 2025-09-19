@@ -7,43 +7,48 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="fade-enter">
     <nav class="navbar">
         <div class="nav-logo">Asher</div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li class="dropdown">
-                <a href="#projects">Projects</a>
+                <a href="#">Projects</a>
                 <ul class="dropdown-content">
-                    <li><a href="#personal-projects">Personal</a></li>
-                    <li><a href="#school-projects">School</a></li>
-                    <li><a href="#hunch-projects">HUNCH</a></li>
+                    <li><a href="personal-projects.html">Personal</a></li>
+                    <li><a href="school-projects.html">School</a></li>
+                    <li><a href="hunch-projects.html">HUNCH</a></li>
                 </ul>
             </li>
             <li><a href="#about">About/Contact</a></li>
         </ul>
     </nav>
     <header class="banner" id="home">
-        <h1 class="banner-title">[Havent decided on title yet]</h1>
+        <h1 class="banner-title">Asher VerLee</h1>
         <p class="banner-subtitle">A professional, personal portfolio (finally)</p>
     </header>
-    <main>
+    <main> <!-- need to link images yet-->
         <section class="landing-section">
             <div class="featured-cards">
                 <a class="featured-card" href="personal-projects.html">
-                    <img class="card-img" src="images/personal-logo.png" alt="Personal Projects Logo">
+                    <img class="card-img" src="images/Asher FILLER.png" alt="Personal Projects Logo">
                     <h2>Personal Projects</h2>
                     <p>Code, robotics (Team 930), and more.</p>
                 </a>
                 <a class="featured-card" href="school-projects.html">
-                    <img class="card-img" src="images/school-logo.png" alt="School Projects Logo">
+                    <img class="card-img" src="images/East Troy Logo.png" alt="School Projects Logo">
                     <h2>School Projects</h2>
-                    <p>YouTube, school code, fabrication, and more.</p>
+                    <p>School code, videos, fabrication, and more.</p>
                 </a>
                 <a class="featured-card" href="hunch-projects.html">
-                    <img class="card-img" src="images/hunch-logo.png" alt="NASA HUNCH Projects Logo">
+                    <img class="card-img" src="images/Hunch Logo.png" alt="NASA HUNCH Projects Logo">
                     <h2>NASA HUNCH Projects</h2>
                     <p>Dedicated NASA HUNCH work and highlights.</p>
+                </a>
+                <a class="featured-card" href="Intro to CS Projects.html">
+                    <img class="card-img" src="images/INTRO TO JACK.png" alt="Intro to CS Projects Logo">
+                    <h2>Intro to CS Projects</h2>
+                    <p>Projects from my Intro to Computer Science class.</p>
                 </a>
             </div>
         </section>
@@ -56,8 +61,10 @@
                 <p>[need to write a bio about myself]</p>
                 <div class="contact-info">
                     <p>Email: <a href="mailto:asher.verlee@gmail.com">asher.verlee@gmail.com</a></p>
-                    <p>GitHub: <a href="https://github.com/AsherVerLee" target="_blank">AsherVerLee Github</a></p>
+                    <p>GitHub: <a href="https://github.com/AsherVerLee" target="_blank">AV Github</a></p>
                     <p>LinkedIn: <a href="#" target="_blank">[Need to make my linkedin soon XD]</a></p>
+                    <p>YouTube: <a href="https://www.youtube.com/@AVerlee09" target="_blank">AV YouTube</a></p>
+
                 </div>
             </div>
             <!-- Gallery/Showcase? -->
@@ -66,5 +73,35 @@
             </div>
         </section>
     </main>
+    <script>
+        // Smooth fade transition between pages
+        function fadeNavigate(url) {
+            document.body.classList.add('fade-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 350);
+        }
+        document.querySelectorAll('a, .featured-card, button').forEach(el => {
+            // Only intercept links/buttons that go to .html pages (bc we are like that)
+            if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').endsWith('.html')) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fadeNavigate(el.getAttribute('href'));
+                });
+            }
+            if (el.tagName === 'BUTTON' && el.getAttribute('onclick') && el.getAttribute('onclick').includes('window.location.href')) {
+                const url = el.getAttribute('onclick').split("'")[1];
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fadeNavigate(url);
+                });
+            }
+        });
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('fade-exit');
+            document.body.classList.add('fade-enter');
+            setTimeout(() => document.body.classList.remove('fade-enter'), 400);
+        });
+    </script>
 </body>
 </html>
