@@ -38,4 +38,4 @@ A professional, clean, and modern portfolio website to showcase my personal, sch
 
 ---
 
-Built with HTML, CSS, and a little JavaScript for smooth navigation.
+Built with HTML, CSS, and a little JavaScript for page transitions.

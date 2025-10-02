@@ -3,12 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Projects</title>
+    <title>Personal Projects - Asher VerLee</title>
+    <link rel="icon" type="image/svg+xml" href="images/Windows 11 Folder Icon.svg">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Personal Projects</h1>
-    <p>Showcase my personal coding, robotics, and other projects here.</p>
-    <button onclick="window.location.href='index.html'">Back to Home</button>
+<body class="fade-enter">
+    <nav class="navbar">
+        <div class="nav-logo">Asher</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <ul class="dropdown-content">
+                    <li><a href="personal-projects.html">Personal</a></li>
+                    <li><a href="school-projects.html">School</a></li>
+                    <li><a href="hunch-projects.html">HUNCH</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#about">About/Contact</a></li>
+        </ul>
+    </nav>
+    <header class="banner project-banner" id="home">
+        <h1 class="banner-title">Personal Projects</h1>
+        <p class="banner-subtitle">Code, robotics (Team 930), and personal endeavors</p>
+    </header>
+    <main>
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section">
+            <div class="search-container">
+                <input type="text" id="projectSearch" placeholder="Search projects..." class="search-input">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="code">Code</button>
+                    <button class="filter-btn" data-filter="robotics">Robotics</button>
+                    <button class="filter-btn" data-filter="hardware">Hardware</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Grid Section -->
+        <section class="projects-grid">
+            <!-- Example project cards - replace with real projects -->
+            <div class="project-item" data-category="robotics">
+                <img src="https://via.placeholder.com/300x200" alt="Team 930 Robot" class="project-image">
+                <div class="project-content">
+                    <h3>Team 930 Robot</h3>
+                    <p>Competitive robotics project with advanced autonomous features.</p>
+                    <div class="project-tags">
+                        <span class="tag">Robotics</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Competition</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn-primary project-demo-btn">Live Demo</button>
+                        <a href="#" class="btn-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-item" data-category="code">
+                <img src="https://via.placeholder.com/300x200" alt="Circuit Plotter" class="project-image">
+                <div class="project-content">
+                    <h3>930 Circuit Plotter</h3>
+                    <p>Tool for visualizing and plotting electrical circuits.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Visualization</span>
+                        <span class="tag">Web</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn-primary project-demo-btn">Live Demo</button>
+                        <a href="https://github.com/AsherVerLee/930-Wire-Plotting-tool" class="btn-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Home Button -->
+        <div class="navigation-section">
+            <button onclick="window.location.href='index.html'" class="btn-home">← Back to Home</button>
+        </div>
+    </main>
+
+    <!-- Project Modal for Live Demos -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalProjectContent">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fade navigation function (reused from main page)
+        function fadeNavigate(url) {
+            document.body.classList.add('fade-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 350);
+        }
+
+        // Search functionality for projects
+        const searchInput = document.getElementById('projectSearch');
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            projectItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                const tags = Array.from(item.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || tags.some(tag => tag.includes(searchTerm))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality for project categories
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Update active button styling
+                filterButtons.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const filter = e.target.dataset.filter;
+                projectItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal functionality for project demos
+        const modal = document.getElementById('projectModal');
+        const demoButtons = document.querySelectorAll('.project-demo-btn');
+        const closeModal = document.querySelector('.close-modal');
+
+        demoButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const projectItem = e.target.closest('.project-item');
+                const title = projectItem.querySelector('h3').textContent;
+                const description = projectItem.querySelector('p').textContent;
+                
+                // Populate modal with project details
+                document.getElementById('modalProjectContent').innerHTML = `
+                    <h2>${title}</h2>
+                    <p>${description}</p>
+                    <p><em>Live demo would be embedded here...</em></p>
+                `;
+                
+                modal.style.display = 'block';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Smooth navigation handling
+        document.querySelectorAll('a, button').forEach(el => {
+            if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').endsWith('.html')) {
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fadeNavigate(el.getAttribute('href'));
+                });
+            }
+            if (el.tagName === 'BUTTON' && el.getAttribute('onclick') && el.getAttribute('onclick').includes('window.location.href')) {
+                const url = el.getAttribute('onclick').split("'")[1];
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fadeNavigate(url);
+                });
+            }
+        });
+
+        // Page load animation
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('fade-exit');
+            document.body.classList.add('fade-enter');
+            setTimeout(() => document.body.classList.remove('fade-enter'), 400);
+        });
+
+        // Lazy loading for project images (Performance enhancement)
+        const images = document.querySelectorAll('.project-image');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Enhanced Easter Egg: Advanced Missile Launch System
+        let clickCount = 0;
+        let clickTimer = null;
+        let keyVisible = false;
+        let keyActivated = false;
+        let launchSequenceActive = false;
+        let keysPressed = { a: false, l: false };
+        let holdTimer = null;
+        let missileSystemReset = true;
+        
+        const navLogo = document.querySelector('.nav-logo');
+        
+        // Add launch key CSS
+        const launchKeyStyle = document.createElement('style');
+        launchKeyStyle.textContent = `
+            .launch-key {
+                position: fixed; top: 1rem; left: 8rem; width: 30px; height: 30px;
+                background: linear-gradient(45deg, #ffd700, #ffed4a); border: 2px solid #b8860b;
+                border-radius: 50%; cursor: pointer; z-index: 1000; opacity: 0;
+                transform: scale(0) rotate(0deg); transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); display: flex; align-items: center;
+                justify-content: center; font-size: 1.2rem;
+            }
+            .launch-key.visible { opacity: 1; transform: scale(1) rotate(360deg); }
+            .launch-key.activated {
+                background: linear-gradient(45deg, #ff4444, #cc0000); border-color: #800000;
+                box-shadow: 0 4px 15px rgba(255, 68, 68, 0.6); animation: keyPulse 1s ease-in-out infinite alternate;
+            }
+            @keyframes keyPulse {
+                0% { box-shadow: 0 4px 15px rgba(255, 68, 68, 0.6); }
+                100% { box-shadow: 0 6px 25px rgba(255, 68, 68, 0.9); }
+            }
+            .missile-control-panel {
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #1a1a1a, #2d2d2d); border: 3px solid #ff4444;
+                border-radius: 15px; padding: 2rem; color: #ff4444; font-family: 'Courier New', monospace;
+                z-index: 9999; box-shadow: 0 0 50px rgba(255, 68, 68, 0.5); min-width: 400px; text-align: center;
+            }
+            .coordinate-input {
+                background: #000; color: #00ff00; border: 2px solid #00ff00; padding: 0.5rem 1rem;
+                margin: 0.5rem; border-radius: 5px; font-family: 'Courier New', monospace;
+                font-size: 1.1rem; width: 120px; text-align: center;
+            }
+            .launch-button {
+                background: linear-gradient(135deg, #ff4444, #cc0000); color: white; border: none;
+                padding: 1rem 2rem; margin: 1rem; border-radius: 10px; font-family: 'Courier New', monospace;
+                font-size: 1.2rem; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4); transition: all 0.2s ease;
+            }
+            .launch-button:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6); }
+            .launch-button.charging { animation: launchCharge 0.1s ease-in-out infinite alternate; background: linear-gradient(135deg, #ffaa00, #ff6600); }
+            @keyframes launchCharge { 0% { transform: scale(1.05); } 100% { transform: scale(1.1); } }
+            .status-panel {
+                position: fixed; top: 2rem; right: 2rem; background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+                border: 2px solid #00ff00; border-radius: 10px; padding: 1.5rem; color: #00ff00;
+                font-family: 'Courier New', monospace; z-index: 9998; min-width: 250px; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            }
+            .progress-bar { width: 100%; height: 20px; background: #333; border-radius: 10px; overflow: hidden; margin: 0.5rem 0; }
+            .progress-fill { height: 100%; background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000); transition: width 0.1s ease; border-radius: 10px; }
+            .minimize-btn { position: absolute; top: 5px; right: 10px; background: none; border: none; color: #00ff00; cursor: pointer; font-size: 1.2rem; }
+            .minimized { height: 40px; overflow: hidden; }
+            .radar-display { width: 100px; height: 100px; border: 2px solid #00ff00; border-radius: 50%; margin: 1rem auto; position: relative; background: radial-gradient(circle, #001100, #000000); }
+            .radar-sweep { position: absolute; top: 50%; left: 50%; width: 2px; height: 45px; background: linear-gradient(to top, transparent, #00ff00); transform-origin: bottom; animation: radarSweep 2s linear infinite; margin-left: -1px; margin-top: -45px; }
+            @keyframes radarSweep { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        `;
+        document.head.appendChild(launchKeyStyle);
+        
+        // Logo click detection
+        navLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (!missileSystemReset) return;
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
+            if (clickCount >= 5 && !keyVisible) {
+                spawnLaunchKey();
+                clickCount = 0;
+            }
+        });
+        
+        function spawnLaunchKey() {
+            const launchKey = document.createElement('div');
+            launchKey.className = 'launch-key';
+            launchKey.innerHTML = '🔑';
+            launchKey.title = 'Turn the key to activate missile systems';
+            document.body.appendChild(launchKey);
+            setTimeout(() => { launchKey.classList.add('visible'); }, 100);
+            launchKey.addEventListener('click', function() {
+                if (!keyActivated) activateLaunchKey(launchKey);
+            });
+            keyVisible = true;
+        }
+        
+        function activateLaunchKey(keyElement) {
+            keyActivated = true;
+            keyElement.classList.add('activated');
+            keyElement.innerHTML = '🔴';
+            keyElement.title = 'Launch systems ACTIVE';
+            setTimeout(() => { showMissileControlPanel(); }, 500);
+        }
+        
+        function showMissileControlPanel() {
+            const controlPanel = document.createElement('div');
+            controlPanel.className = 'missile-control-panel';
+            controlPanel.innerHTML = `
+                <h2 style="margin: 0 0 1rem 0; color: #ff4444; text-shadow: 0 0 10px #ff4444;">🚀 MISSILE LAUNCH SYSTEM 🚀</h2>
+                <div style="margin: 1.5rem 0;">
+                    <label style="display: block; margin: 0.5rem 0;">TARGET COORDINATES:</label>
+                    <input type="text" id="latInput" class="coordinate-input" placeholder="Latitude" maxlength="8">
+                    <input type="text" id="lonInput" class="coordinate-input" placeholder="Longitude" maxlength="8">
+                </div>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255,68,68,0.1); border-radius: 8px;">
+                    <p style="margin: 0; font-size: 0.9rem;">⚠️ LAUNCH PROTOCOL ⚠️</p>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">Hold A + L simultaneously for 3 seconds</p>
+                </div>
+                <button id="launchBtn" class="launch-button" disabled>ENTER COORDINATES FIRST</button>
+                <div id="launchProgress" style="margin-top: 1rem; display: none;">
+                    <div style="background: #333; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div id="progressBar" style="height: 100%; background: linear-gradient(90deg, #ffaa00, #ff0000); width: 0%; transition: width 0.1s;"></div>
+                    </div>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">Hold A + L... <span id="progressText">0.0s</span></p>
+                </div>
+            `;
+            document.body.appendChild(controlPanel);
+            
+            const latInput = document.getElementById('latInput');
+            const lonInput = document.getElementById('lonInput');
+            const launchBtn = document.getElementById('launchBtn');
+            
+            function validateCoordinates() {
+                const lat = latInput.value.trim();
+                const lon = lonInput.value.trim();
+                if (lat && lon && lat.length >= 2 && lon.length >= 2) {
+                    launchBtn.disabled = false;
+                    launchBtn.textContent = 'READY TO LAUNCH';
+                    launchBtn.style.background = 'linear-gradient(135deg, #ff4444, #cc0000)';
+                    return true;
+                }
+                launchBtn.disabled = true;
+                launchBtn.textContent = 'ENTER COORDINATES FIRST';
+                launchBtn.style.background = '#666';
+                return false;
+            }
+            
+            latInput.addEventListener('input', validateCoordinates);
+            lonInput.addEventListener('input', validateCoordinates);
+            
+            let holdStartTime = null;
+            let progressInterval = null;
+            
+            document.addEventListener('keydown', function(e) {
+                if (!validateCoordinates()) return;
+                const key = e.key.toLowerCase();
+                if (key === 'a' || key === 'l') {
+                    keysPressed[key] = true;
+                    if (keysPressed.a && keysPressed.l && !launchSequenceActive) {
+                        startLaunchSequence();
+                    }
+                }
+            });
+            
+            document.addEventListener('keyup', function(e) {
+                const key = e.key.toLowerCase();
+                if (key === 'a' || key === 'l') {
+                    keysPressed[key] = false;
+                    if (launchSequenceActive && (!keysPressed.a || !keysPressed.l)) {
+                        cancelLaunchSequence();
+                    }
+                }
+            });
+            
+            function startLaunchSequence() {
+                launchSequenceActive = true;
+                holdStartTime = Date.now();
+                document.getElementById('launchProgress').style.display = 'block';
+                launchBtn.classList.add('charging');
+                launchBtn.textContent = 'LAUNCHING...';
+                progressInterval = setInterval(() => {
+                    const elapsed = (Date.now() - holdStartTime) / 1000;
+                    const progress = Math.min(elapsed / 3, 1) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('progressText').textContent = elapsed.toFixed(1) + 's';
+                    if (elapsed >= 3) {
+                        clearInterval(progressInterval);
+                        executeLaunch();
+                    }
+                }, 50);
+            }
+            
+            function cancelLaunchSequence() {
+                launchSequenceActive = false;
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                    progressInterval = null;
+                }
+                document.getElementById('launchProgress').style.display = 'none';
+                document.getElementById('progressBar').style.width = '0%';
+                launchBtn.classList.remove('charging');
+                launchBtn.textContent = 'READY TO LAUNCH';
+            }
+            
+            function executeLaunch() {
+                const lat = latInput.value;
+                const lon = lonInput.value;
+                document.body.removeChild(controlPanel);
+                initiateMissileFlight(lat, lon);
+            }
+        }
+        
+        function initiateMissileFlight(lat, lon) {
+            const statusPanel = document.createElement('div');
+            statusPanel.className = 'status-panel';
+            statusPanel.innerHTML = `
+                <button class="minimize-btn" onclick="this.parentElement.classList.toggle('minimized')">─</button>
+                <h3 style="margin: 0 0 1rem 0; color: #ff4444;">🚀 MISSILE STATUS</h3>
+                <div class="radar-display"><div class="radar-sweep"></div></div>
+                <div style="margin: 1rem 0;">
+                    <div>Target: ${lat}°, ${lon}°</div>
+                    <div>Status: <span id="missileStatus">LAUNCHED</span></div>
+                    <div>ETA: <span id="missileETA">10s</span></div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="flightProgress" style="width: 0%;"></div>
+                </div>
+                <div style="font-size: 0.8rem; margin-top: 0.5rem;">Distance: <span id="distanceCounter">100%</span></div>
+            `;
+            document.body.appendChild(statusPanel);
+            
+            let flightTime = 0;
+            const flightDuration = 10;
+            const flightInterval = setInterval(() => {
+                flightTime += 0.1;
+                const progress = (flightTime / flightDuration) * 100;
+                const remaining = Math.max(0, flightDuration - flightTime);
+                const distance = Math.max(0, 100 - progress);
+                document.getElementById('flightProgress').style.width = progress + '%';
+                document.getElementById('missileETA').textContent = remaining.toFixed(1) + 's';
+                document.getElementById('distanceCounter').textContent = distance.toFixed(0) + '%';
+                if (flightTime >= flightDuration) {
+                    clearInterval(flightInterval);
+                    missileImpact(statusPanel);
+                }
+            }, 100);
+        }
+        
+        function missileImpact(statusPanel) {
+            statusPanel.innerHTML = `
+                <button class="minimize-btn" onclick="this.parentElement.classList.toggle('minimized')">─</button>
+                <h3 style="margin: 0 0 1rem 0; color: #00ff00;">✅ MISSION SUCCESS</h3>
+                <div style="margin: 1rem 0; text-align: center;">
+                    <div style="font-size: 4rem; animation: successPulse 1s ease-in-out;">🎯</div>
+                    <div style="color: #00ff00; font-weight: bold;">DIRECT HIT</div>
+                    <div style="margin: 1rem 0; font-size: 0.9rem;">Target eliminated successfully</div>
+                </div>
+                <div style="font-size: 0.7rem; opacity: 0.7; margin-top: 1rem;">No actual missiles were fired. This is just a cool easter egg! 😄</div>
+            `;
+            const successStyle = document.createElement('style');
+            successStyle.textContent = `@keyframes successPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }`;
+            document.head.appendChild(successStyle);
+            setTimeout(() => {
+                statusPanel.style.transition = 'opacity 2s ease';
+                statusPanel.style.opacity = '0';
+                setTimeout(() => { resetMissileSystem(); }, 2000);
+            }, 3000);
+        }
+        
+        function resetMissileSystem() {
+            const elements = document.querySelectorAll('.launch-key, .status-panel, .missile-control-panel');
+            elements.forEach(el => { if (el.parentNode) el.parentNode.removeChild(el); });
+            clickCount = 0; keyVisible = false; keyActivated = false; launchSequenceActive = false;
+            keysPressed = { a: false, l: false }; missileSystemReset = true;
+        }
+    </script>
 </body>
 </html>

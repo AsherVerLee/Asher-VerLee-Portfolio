@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Base Converter - Asher VerLee</title>
+    <link rel="icon" type="image/svg+xml" href="images/Windows 11 Folder Icon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+    <style>
+        .converter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .converter-card {
+            background: #232a36;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .converter-card h3 {
+            color: #356cc6;
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .input-row label {
+            min-width: 80px;
+            color: #b0c4de;
+            font-weight: 500;
+        }
+        
+        .number-input, .type-selector {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #232a36;
+            border-radius: 8px;
+            background: #181c24;
+            color: #eaf6fb;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .number-input {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .type-selector {
+            font-family: 'Inter', Arial, sans-serif;
+            cursor: pointer;
+        }
+        
+        .type-selector option {
+            background: #181c24;
+            color: #eaf6fb;
+        }
+        
+        .number-input:focus, .type-selector:focus {
+            outline: none;
+            border-color: #356cc6;
+            box-shadow: 0 0 0 3px rgba(53, 108, 198, 0.1);
+        }
+        
+        .number-input.error {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+        
+        .results-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+        }
+        
+        .result-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .result-item label {
+            color: #b0c4de;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .convert-btn {
+            background: #356cc6;
+            color: #eaf6fb;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            align-self: center;
+        }
+        
+        .convert-btn:hover {
+            background: #285a8c;
+            transform: scale(1.05);
+        }
+        
+        .convert-btn:disabled {
+            background: #4a5568;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-display {
+            background: #181c24;
+            border: 2px solid #356cc6;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #eaf6fb;
+            text-align: center;
+            word-break: break-all;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .info-section {
+            background: #1a1e28;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .info-section h4 {
+            color: #356cc6;
+            margin: 0 0 1rem 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .info-item {
+            background: #232a36;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .info-item strong {
+            color: #356cc6;
+        }
+        
+        @media (max-width: 768px) {
+            .input-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .input-row label {
+                min-width: auto;
+            }
+            
+            .converter-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="fade-enter">
+    <nav class="navbar">
+        <div class="nav-logo">Asher</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <ul class="dropdown-content">
+                    <li><a href="personal-projects.html">Personal</a></li>
+                    <li><a href="school-projects.html">School</a></li>
+                    <li><a href="hunch-projects.html">HUNCH</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#about">About/Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &gt; <a href="Intro-to-CS-Projects.html">Intro to CS Projects</a> &gt; <span>Number Base Converter</span>
+    </div>
+
+    <header class="banner project-banner">
+        <h1 class="banner-title">Number Base Converter</h1>
+        <p class="banner-subtitle">Convert between decimal, binary, and hexadecimal number systems</p>
+    </header>
+
+    <main class="converter-container">
+        <!-- Universal Number Base Converter -->
+        <div class="converter-card">
+            <h3>🔢 Universal Number Base Converter</h3>
+            <div class="input-group">
+                <div class="input-row">
+                    <label for="inputType">Input Type:</label>
+                    <select id="inputType" class="type-selector" onchange="updatePlaceholder()">
+                        <option value="decimal">Decimal (Base 10)</option>
+                        <option value="binary">Binary (Base 2)</option>
+                        <option value="hexadecimal">Hexadecimal (Base 16)</option>
+                    </select>
+                </div>
+                <div class="input-row">
+                    <label for="numberInput">Number:</label>
+                    <input type="text" id="numberInput" class="number-input" placeholder="Enter a decimal number (e.g., 255)" maxlength="64">
+                </div>
+                <button class="convert-btn" onclick="convertNumber()">Convert</button>
+            </div>
+            <div class="error-message" id="conversionError"></div>
+        </div>
+
+        <!-- Results Display -->
+        <div class="converter-card">
+            <h3>📊 Conversion Results</h3>
+            <div class="results-grid">
+                <div class="result-item">
+                    <label>Decimal (Base 10):</label>
+                    <div class="result-display" id="resultDecimal">Enter a number above</div>
+                </div>
+                <div class="result-item">
+                    <label>Binary (Base 2):</label>
+                    <div class="result-display" id="resultBinary">Enter a number above</div>
+                </div>
+                <div class="result-item">
+                    <label>Hexadecimal (Base 16):</label>
+                    <div class="result-display" id="resultHex">Enter a number above</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="info-section">
+            <h4>Number Systems Quick Reference</h4>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Decimal (Base 10)</strong><br>
+                    Uses digits: 0-9<br>
+                    Example: 255
+                </div>
+                <div class="info-item">
+                    <strong>Binary (Base 2)</strong><br>
+                    Uses digits: 0-1<br>
+                    Example: 11111111
+                </div>
+                <div class="info-item">
+                    <strong>Hexadecimal (Base 16)</strong><br>
+                    Uses: 0-9, A-F<br>
+                    Example: FF
+                </div>
+                <div class="info-item">
+                    <strong>Fun Fact</strong><br>
+                    255 = 11111111₂ = FF₁₆<br>
+                    (Maximum value in 8 bits)
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Go to top">↑</button>
+
+    <script>
+        // Utility functions
+        function clearError() {
+            document.getElementById('conversionError').textContent = '';
+        }
+
+        function showError(message) {
+            document.getElementById('conversionError').textContent = message;
+        }
+
+        function updatePlaceholder() {
+            const inputType = document.getElementById('inputType').value;
+            const numberInput = document.getElementById('numberInput');
+            
+            const placeholders = {
+                'decimal': 'Enter a decimal number (e.g., 255)',
+                'binary': 'Enter a binary number (e.g., 11111111)',
+                'hexadecimal': 'Enter a hex number (e.g., FF or 0xFF)'
+            };
+            
+            numberInput.placeholder = placeholders[inputType];
+            clearError();
+            numberInput.classList.remove('error');
+        }
+
+        function displayResults(decimal, binary, hex) {
+            document.getElementById('resultDecimal').textContent = decimal.toLocaleString();
+            document.getElementById('resultBinary').textContent = binary;
+            document.getElementById('resultHex').textContent = hex;
+            
+            // Add success animation
+            const results = document.querySelectorAll('.result-display');
+            results.forEach(result => {
+                result.style.border = '2px solid #27ae60';
+                result.style.transform = 'scale(1.02)';
+            });
+            
+            setTimeout(() => {
+                results.forEach(result => {
+                    result.style.border = '2px solid #356cc6';
+                    result.style.transform = 'scale(1)';
+                });
+            }, 800);
+        }
+
+        function convertNumber() {
+            clearError();
+            const inputType = document.getElementById('inputType').value;
+            let input = document.getElementById('numberInput').value.trim();
+            const numberInput = document.getElementById('numberInput');
+            
+            if (!input) {
+                showError('Please enter a number');
+                return;
+            }
+            
+            let decimal;
+            
+            try {
+                switch (inputType) {
+                    case 'decimal':
+                        decimal = parseInt(input);
+                        if (isNaN(decimal) || decimal < 0) {
+                            throw new Error('Please enter a valid positive decimal number');
+                        }
+                        if (decimal > Number.MAX_SAFE_INTEGER) {
+                            throw new Error('Number is too large for accurate conversion');
+                        }
+                        break;
+                        
+                    case 'binary':
+                        // Validate binary input (only 0s and 1s)
+                        if (!/^[01]+$/.test(input)) {
+                            throw new Error('Binary numbers can only contain 0s and 1s');
+                        }
+                        if (input.length > 53) {
+                            throw new Error('Binary number is too long for accurate conversion');
+                        }
+                        decimal = parseInt(input, 2);
+                        break;
+                        
+                    case 'hexadecimal':
+                        // Remove 0x prefix if present
+                        if (input.toUpperCase().startsWith('0X')) {
+                            input = input.substring(2);
+                        }
+                        input = input.toUpperCase();
+                        
+                        // Validate hex input
+                        if (!/^[0-9A-F]+$/.test(input)) {
+                            throw new Error('Hexadecimal numbers can only contain 0-9 and A-F');
+                        }
+                        if (input.length > 13) {
+                            throw new Error('Hexadecimal number is too long for accurate conversion');
+                        }
+                        decimal = parseInt(input, 16);
+                        break;
+                        
+                    default:
+                        throw new Error('Invalid input type selected');
+                }
+                
+                // Convert to all formats
+                const binary = decimal.toString(2);
+                const hex = decimal.toString(16).toUpperCase();
+                
+                // Display results
+                displayResults(decimal, binary, hex);
+                numberInput.classList.remove('error');
+                
+            } catch (error) {
+                showError(error.message);
+                numberInput.classList.add('error');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('numberInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') convertNumber();
+        });
+
+        document.getElementById('numberInput').addEventListener('input', function() {
+            this.classList.remove('error');
+            clearError();
+        });
+
+        // Navigation and fade effects
+        document.querySelectorAll('a').forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').endsWith('.html')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.classList.add('fade-exit');
+                    setTimeout(() => {
+                        window.location.href = link.getAttribute('href');
+                    }, 350);
+                });
+            }
+        });
+
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Page load animation
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('fade-exit');
+            document.body.classList.add('fade-enter');
+            setTimeout(() => document.body.classList.remove('fade-enter'), 400);
+        });
+
+        // Easter Egg: Airstrike Mode
+        let clickCount = 0;
+        let clickTimer = null;
+        const navLogo = document.querySelector('.nav-logo');
+        
+        navLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            clickCount++;
+            
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
+            
+            if (clickCount >= 5) {
+                activateAirstrike();
+                clickCount = 0;
+            }
+        });
+        
+        function activateAirstrike() {
+            const airstrikeOverlay = document.createElement('div');
+            airstrikeOverlay.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+                z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+                color: #ff0000; font-family: 'Courier New', monospace;
+                animation: airstrikeFlash 0.5s ease-in-out infinite alternate;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes airstrikeFlash {
+                    0% { background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%); }
+                    100% { background: radial-gradient(circle, rgba(255,100,0,0.5) 0%, rgba(50,0,0,0.9) 100%); }
+                }
+                @keyframes explosionShake {
+                    0%, 100% { transform: translate(0, 0); }
+                    10% { transform: translate(-2px, -1px); } 20% { transform: translate(2px, 1px); }
+                    30% { transform: translate(-1px, 2px); } 40% { transform: translate(1px, -2px); }
+                    50% { transform: translate(-2px, 1px); } 60% { transform: translate(2px, -1px); }
+                    70% { transform: translate(-1px, -2px); } 80% { transform: translate(1px, 2px); }
+                    90% { transform: translate(-2px, -1px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            airstrikeOverlay.innerHTML = `
+                <div style="text-align: center; animation: explosionShake 0.3s ease-in-out infinite;">
+                    <h1 style="font-size: 4rem; margin: 0; text-shadow: 0 0 20px #ff0000;">⚠️ AIRSTRIKE INCOMING ⚠️</h1>
+                    <p style="font-size: 2rem; margin: 1rem 0; text-shadow: 0 0 10px #ff0000;">TARGET ACQUIRED</p>
+                    <div style="font-size: 1.5rem; margin: 2rem 0;">
+                        <div>🎯 COORDINATES: ${Math.floor(Math.random() * 90)}°N ${Math.floor(Math.random() * 180)}°W</div>
+                        <div style="margin-top: 1rem;">💥 ETA: <span id="countdown">5</span> SECONDS</div>
+                    </div>
+                    <button onclick="cancelAirstrike()" style="
+                        background: #ff0000; color: white; border: 2px solid #ffffff; padding: 1rem 2rem;
+                        font-size: 1.2rem; font-family: 'Courier New', monospace; cursor: pointer; border-radius: 5px;
+                        margin-top: 2rem; animation: explosionShake 0.2s ease-in-out infinite;
+                    ">ABORT MISSION</button>
+                </div>
+            `;
+            
+            document.body.appendChild(airstrikeOverlay);
+            
+            let countdown = 5;
+            const countdownElement = document.getElementById('countdown');
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdownElement) countdownElement.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    showExplosion(airstrikeOverlay);
+                }
+            }, 1000);
+            
+            window.cancelAirstrike = function() {
+                clearInterval(countdownInterval);
+                airstrikeOverlay.innerHTML = `
+                    <div style="text-align: center;">
+                        <h1 style="font-size: 3rem; margin: 0; color: #00ff00; text-shadow: 0 0 20px #00ff00;">✅ MISSION ABORTED</h1>
+                        <p style="font-size: 1.5rem; margin: 2rem 0; color: #00ff00;">Crisis averted. Good call, Commander.</p>
+                        <button onclick="document.body.removeChild(this.closest('div'))" style="
+                            background: #00ff00; color: black; border: none; padding: 1rem 2rem;
+                            font-size: 1rem; cursor: pointer; border-radius: 5px;
+                        ">Return to Base</button>
+                    </div>
+                `;
+            };
+        }
+        
+        function showExplosion(overlay) {
+            overlay.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 8rem; animation: explosionShake 0.1s ease-in-out infinite;">💥💥💥</div>
+                    <h1 style="font-size: 3rem; margin: 1rem 0; color: #ffaa00; text-shadow: 0 0 30px #ff0000;">DIRECT HIT!</h1>
+                    <p style="font-size: 1.5rem; margin: 1rem 0;">Target eliminated with extreme prejudice.</p>
+                    <p style="font-size: 1rem; opacity: 0.8;">Just kidding! No websites were harmed in the making of this easter egg.</p>
+                    <button onclick="document.body.removeChild(this.closest('div'))" style="
+                        background: #356cc6; color: white; border: none; padding: 1rem 2rem;
+                        font-size: 1rem; cursor: pointer; border-radius: 5px; margin-top: 2rem;
+                    ">Return to Portfolio</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to CS Projects - Asher VerLee</title>
+    <link rel="icon" type="image/svg+xml" href="images/Windows 11 Folder Icon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+</head>
+<body class="fade-enter">
+    <nav class="navbar">
+        <div class="nav-logo">Asher</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <ul class="dropdown-content">
+                    <li><a href="personal-projects.html">Personal</a></li>
+                    <li><a href="school-projects.html">School</a></li>
+                    <li><a href="hunch-projects.html">HUNCH</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#about">About/Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &gt; <span>Intro to CS Projects</span>
+    </div>
+
+    <header class="banner project-banner">
+        <h1 class="banner-title">Intro to CS Projects</h1>
+        <p class="banner-subtitle">Projects from my Introduction to Computer Science class</p>
+    </header>
+
+    <main>
+        <!-- Project Grid Section -->
+        <section class="projects-grid">
+            <div class="project-item" data-category="code">
+                <img src="https://via.placeholder.com/300x200?text=🔢+Number+Converter" alt="Number Base Converter" class="project-image">
+                <div class="project-content">
+                    <h3>Number Base Converter</h3>
+                    <p>Convert between decimal, binary, and hexadecimal number systems with real-time validation and formatting.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Math</span>
+                        <span class="tag">Utility</span>
+                        <span class="tag">Web</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="number-converter.html" class="btn-primary">Try It Live</a>
+                        <a href="#" class="btn-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder for more projects -->
+            <div class="project-item" data-category="code">
+                <img src="https://via.placeholder.com/300x200?text=Coming+Soon" alt="Coming Soon" class="project-image">
+                <div class="project-content">
+                    <h3>More Projects Coming Soon</h3>
+                    <p>Additional projects from my Intro to CS class will be added here as they are completed.</p>
+                    <div class="project-tags">
+                        <span class="tag">TBD</span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn-primary" disabled>Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Go to top">↑</button>
+
+    <script>
+        // Navigation and fade effects
+        document.querySelectorAll('a').forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').endsWith('.html')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.classList.add('fade-exit');
+                    setTimeout(() => {
+                        window.location.href = link.getAttribute('href');
+                    }, 350);
+                });
+            }
+        });
+
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Page load animation
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('fade-exit');
+            document.body.classList.add('fade-enter');
+            setTimeout(() => document.body.classList.remove('fade-enter'), 400);
+        });
+
+        // Enhanced Easter Egg: Advanced Missile Launch System
+        let clickCount = 0;
+        let clickTimer = null;
+        let keyVisible = false;
+        let keyActivated = false;
+        let launchSequenceActive = false;
+        let keysPressed = { a: false, l: false };
+        let holdTimer = null;
+        let missileSystemReset = true;
+        
+        const navLogo = document.querySelector('.nav-logo');
+        
+        // Add launch key CSS
+        const launchKeyStyle = document.createElement('style');
+        launchKeyStyle.textContent = `
+            .launch-key {
+                position: fixed;
+                top: 1rem;
+                left: 8rem;
+                width: 30px;
+                height: 30px;
+                background: linear-gradient(45deg, #ffd700, #ffed4a);
+                border: 2px solid #b8860b;
+                border-radius: 50%;
+                cursor: pointer;
+                z-index: 1000;
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+            }
+            .launch-key.visible {
+                opacity: 1;
+                transform: scale(1) rotate(360deg);
+            }
+            .launch-key.activated {
+                background: linear-gradient(45deg, #ff4444, #cc0000);
+                border-color: #800000;
+                box-shadow: 0 4px 15px rgba(255, 68, 68, 0.6);
+                animation: keyPulse 1s ease-in-out infinite alternate;
+            }
+            @keyframes keyPulse {
+                0% { box-shadow: 0 4px 15px rgba(255, 68, 68, 0.6); }
+                100% { box-shadow: 0 6px 25px rgba(255, 68, 68, 0.9); }
+            }
+            .missile-control-panel {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+                border: 3px solid #ff4444;
+                border-radius: 15px;
+                padding: 2rem;
+                color: #ff4444;
+                font-family: 'Courier New', monospace;
+                z-index: 9999;
+                box-shadow: 0 0 50px rgba(255, 68, 68, 0.5);
+                min-width: 400px;
+                text-align: center;
+            }
+            .coordinate-input {
+                background: #000;
+                color: #00ff00;
+                border: 2px solid #00ff00;
+                padding: 0.5rem 1rem;
+                margin: 0.5rem;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 1.1rem;
+                width: 120px;
+                text-align: center;
+            }
+            .launch-button {
+                background: linear-gradient(135deg, #ff4444, #cc0000);
+                color: white;
+                border: none;
+                padding: 1rem 2rem;
+                margin: 1rem;
+                border-radius: 10px;
+                font-family: 'Courier New', monospace;
+                font-size: 1.2rem;
+                cursor: pointer;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+                transition: all 0.2s ease;
+            }
+            .launch-button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+            }
+            .launch-button.charging {
+                animation: launchCharge 0.1s ease-in-out infinite alternate;
+                background: linear-gradient(135deg, #ffaa00, #ff6600);
+            }
+            @keyframes launchCharge {
+                0% { transform: scale(1.05); }
+                100% { transform: scale(1.1); }
+            }
+            .status-panel {
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+                border: 2px solid #00ff00;
+                border-radius: 10px;
+                padding: 1.5rem;
+                color: #00ff00;
+                font-family: 'Courier New', monospace;
+                z-index: 9998;
+                min-width: 250px;
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            }
+            .progress-bar {
+                width: 100%;
+                height: 20px;
+                background: #333;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 0.5rem 0;
+            }
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
+                transition: width 0.1s ease;
+                border-radius: 10px;
+            }
+            .minimize-btn {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                background: none;
+                border: none;
+                color: #00ff00;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+            .minimized {
+                height: 40px;
+                overflow: hidden;
+            }
+            .radar-display {
+                width: 100px;
+                height: 100px;
+                border: 2px solid #00ff00;
+                border-radius: 50%;
+                margin: 1rem auto;
+                position: relative;
+                background: radial-gradient(circle, #001100, #000000);
+            }
+            .radar-sweep {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 2px;
+                height: 45px;
+                background: linear-gradient(to top, transparent, #00ff00);
+                transform-origin: bottom;
+                animation: radarSweep 2s linear infinite;
+                margin-left: -1px;
+                margin-top: -45px;
+            }
+            @keyframes radarSweep {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(launchKeyStyle);
+        
+        // Logo click detection
+        navLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!missileSystemReset) return;
+            
+            clickCount++;
+            
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
+            
+            if (clickCount >= 5 && !keyVisible) {
+                spawnLaunchKey();
+                clickCount = 0;
+            }
+        });
+        
+        function spawnLaunchKey() {
+            const launchKey = document.createElement('div');
+            launchKey.className = 'launch-key';
+            launchKey.innerHTML = '🔑';
+            launchKey.title = 'Turn the key to activate missile systems';
+            document.body.appendChild(launchKey);
+            
+            setTimeout(() => {
+                launchKey.classList.add('visible');
+            }, 100);
+            
+            launchKey.addEventListener('click', function() {
+                if (!keyActivated) {
+                    activateLaunchKey(launchKey);
+                }
+            });
+            
+            keyVisible = true;
+        }
+        
+        function activateLaunchKey(keyElement) {
+            keyActivated = true;
+            keyElement.classList.add('activated');
+            keyElement.innerHTML = '🔴';
+            keyElement.title = 'Launch systems ACTIVE';
+            
+            setTimeout(() => {
+                showMissileControlPanel();
+            }, 500);
+        }
+        
+        function showMissileControlPanel() {
+            const controlPanel = document.createElement('div');
+            controlPanel.className = 'missile-control-panel';
+            controlPanel.innerHTML = `
+                <h2 style="margin: 0 0 1rem 0; color: #ff4444; text-shadow: 0 0 10px #ff4444;">🚀 MISSILE LAUNCH SYSTEM 🚀</h2>
+                <div style="margin: 1.5rem 0;">
+                    <label style="display: block; margin: 0.5rem 0;">TARGET COORDINATES:</label>
+                    <input type="text" id="latInput" class="coordinate-input" placeholder="Latitude" maxlength="8">
+                    <input type="text" id="lonInput" class="coordinate-input" placeholder="Longitude" maxlength="8">
+                </div>
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255,68,68,0.1); border-radius: 8px;">
+                    <p style="margin: 0; font-size: 0.9rem;">⚠️ LAUNCH PROTOCOL ⚠️</p>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">Hold A + L simultaneously for 3 seconds</p>
+                </div>
+                <button id="launchBtn" class="launch-button" disabled>ENTER COORDINATES FIRST</button>
+                <div id="launchProgress" style="margin-top: 1rem; display: none;">
+                    <div style="background: #333; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div id="progressBar" style="height: 100%; background: linear-gradient(90deg, #ffaa00, #ff0000); width: 0%; transition: width 0.1s;"></div>
+                    </div>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem;">Hold A + L... <span id="progressText">0.0s</span></p>
+                </div>
+            `;
+            
+            document.body.appendChild(controlPanel);
+            
+            const latInput = document.getElementById('latInput');
+            const lonInput = document.getElementById('lonInput');
+            const launchBtn = document.getElementById('launchBtn');
+            
+            // Coordinate validation
+            function validateCoordinates() {
+                const lat = latInput.value.trim();
+                const lon = lonInput.value.trim();
+                
+                if (lat && lon && lat.length >= 2 && lon.length >= 2) {
+                    launchBtn.disabled = false;
+                    launchBtn.textContent = 'READY TO LAUNCH';
+                    launchBtn.style.background = 'linear-gradient(135deg, #ff4444, #cc0000)';
+                    return true;
+                }
+                
+                launchBtn.disabled = true;
+                launchBtn.textContent = 'ENTER COORDINATES FIRST';
+                launchBtn.style.background = '#666';
+                return false;
+            }
+            
+            latInput.addEventListener('input', validateCoordinates);
+            lonInput.addEventListener('input', validateCoordinates);
+            
+            // Launch key detection
+            let holdStartTime = null;
+            let progressInterval = null;
+            
+            document.addEventListener('keydown', function(e) {
+                if (!validateCoordinates()) return;
+                
+                const key = e.key.toLowerCase();
+                if (key === 'a' || key === 'l') {
+                    keysPressed[key] = true;
+                    
+                    if (keysPressed.a && keysPressed.l && !launchSequenceActive) {
+                        startLaunchSequence();
+                    }
+                }
+            });
+            
+            document.addEventListener('keyup', function(e) {
+                const key = e.key.toLowerCase();
+                if (key === 'a' || key === 'l') {
+                    keysPressed[key] = false;
+                    
+                    if (launchSequenceActive && (!keysPressed.a || !keysPressed.l)) {
+                        cancelLaunchSequence();
+                    }
+                }
+            });
+            
+            function startLaunchSequence() {
+                launchSequenceActive = true;
+                holdStartTime = Date.now();
+                
+                document.getElementById('launchProgress').style.display = 'block';
+                launchBtn.classList.add('charging');
+                launchBtn.textContent = 'LAUNCHING...';
+                
+                progressInterval = setInterval(() => {
+                    const elapsed = (Date.now() - holdStartTime) / 1000;
+                    const progress = Math.min(elapsed / 3, 1) * 100;
+                    
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('progressText').textContent = elapsed.toFixed(1) + 's';
+                    
+                    if (elapsed >= 3) {
+                        clearInterval(progressInterval);
+                        executeLaunch();
+                    }
+                }, 50);
+            }
+            
+            function cancelLaunchSequence() {
+                launchSequenceActive = false;
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                    progressInterval = null;
+                }
+                
+                document.getElementById('launchProgress').style.display = 'none';
+                document.getElementById('progressBar').style.width = '0%';
+                launchBtn.classList.remove('charging');
+                launchBtn.textContent = 'READY TO LAUNCH';
+            }
+            
+            function executeLaunch() {
+                const lat = latInput.value;
+                const lon = lonInput.value;
+                
+                // Remove control panel
+                document.body.removeChild(controlPanel);
+                
+                // Start missile flight
+                initiateMissileFlight(lat, lon);
+            }
+        }
+        
+        function initiateMissileFlight(lat, lon) {
+            // Create status panel
+            const statusPanel = document.createElement('div');
+            statusPanel.className = 'status-panel';
+            statusPanel.innerHTML = `
+                <button class="minimize-btn" onclick="this.parentElement.classList.toggle('minimized')">─</button>
+                <h3 style="margin: 0 0 1rem 0; color: #ff4444;">🚀 MISSILE STATUS</h3>
+                <div class="radar-display">
+                    <div class="radar-sweep"></div>
+                </div>
+                <div style="margin: 1rem 0;">
+                    <div>Target: ${lat}°, ${lon}°</div>
+                    <div>Status: <span id="missileStatus">LAUNCHED</span></div>
+                    <div>ETA: <span id="missileETA">10s</span></div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="flightProgress" style="width: 0%;"></div>
+                </div>
+                <div style="font-size: 0.8rem; margin-top: 0.5rem;">
+                    Distance: <span id="distanceCounter">100%</span>
+                </div>
+            `;
+            
+            document.body.appendChild(statusPanel);
+            
+            // Animate missile flight
+            let flightTime = 0;
+            const flightDuration = 10; // 10 seconds
+            
+            const flightInterval = setInterval(() => {
+                flightTime += 0.1;
+                const progress = (flightTime / flightDuration) * 100;
+                const remaining = Math.max(0, flightDuration - flightTime);
+                const distance = Math.max(0, 100 - progress);
+                
+                document.getElementById('flightProgress').style.width = progress + '%';
+                document.getElementById('missileETA').textContent = remaining.toFixed(1) + 's';
+                document.getElementById('distanceCounter').textContent = distance.toFixed(0) + '%';
+                
+                if (flightTime >= flightDuration) {
+                    clearInterval(flightInterval);
+                    missileImpact(statusPanel);
+                }
+            }, 100);
+        }
+        
+        function missileImpact(statusPanel) {
+            // Update status to impact
+            statusPanel.innerHTML = `
+                <button class="minimize-btn" onclick="this.parentElement.classList.toggle('minimized')">─</button>
+                <h3 style="margin: 0 0 1rem 0; color: #00ff00;">✅ MISSION SUCCESS</h3>
+                <div style="margin: 1rem 0; text-align: center;">
+                    <div style="font-size: 4rem; animation: successPulse 1s ease-in-out;">🎯</div>
+                    <div style="color: #00ff00; font-weight: bold;">DIRECT HIT</div>
+                    <div style="margin: 1rem 0; font-size: 0.9rem;">Target eliminated successfully</div>
+                </div>
+                <div style="font-size: 0.7rem; opacity: 0.7; margin-top: 1rem;">
+                    No actual missiles were fired. This is just a cool easter egg! 😄
+                </div>
+            `;
+            
+            // Add success animation
+            const successStyle = document.createElement('style');
+            successStyle.textContent = `
+                @keyframes successPulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.2); }
+                }
+            `;
+            document.head.appendChild(successStyle);
+            
+            // Auto-fade and reset after 5 seconds
+            setTimeout(() => {
+                statusPanel.style.transition = 'opacity 2s ease';
+                statusPanel.style.opacity = '0';
+                
+                setTimeout(() => {
+                    resetMissileSystem();
+                }, 2000);
+            }, 3000);
+        }
+        
+        function resetMissileSystem() {
+            // Clean up all elements
+            const elements = document.querySelectorAll('.launch-key, .status-panel, .missile-control-panel');
+            elements.forEach(el => {
+                if (el.parentNode) el.parentNode.removeChild(el);
+            });
+            
+            // Reset state
+            clickCount = 0;
+            keyVisible = false;
+            keyActivated = false;
+            launchSequenceActive = false;
+            keysPressed = { a: false, l: false };
+            missileSystemReset = true;
+        }
+    </script>
+</body>
+</html>

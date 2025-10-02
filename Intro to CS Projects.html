@@ -4,11 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro to CS Projects</title>
+    <link rel="icon" type="image/svg+xml" href="images/Windows 11 Folder Icon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Intro to CS Projects</h1>
-    <p>Projects from my Intro to Computer Science class will be showcased here.</p>
-    <button onclick="window.location.href='index.html'">Back to Home</button>
+    <nav class="navbar">
+        <div class="nav-logo">Asher</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Projects</a>
+                <ul class="dropdown-content">
+                    <li><a href="personal-projects.html">Personal</a></li>
+                    <li><a href="school-projects.html">School</a></li>
+                    <li><a href="hunch-projects.html">HUNCH</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#about">About/Contact</a></li>
+        </ul>
+    </nav>
+    
+    <header class="page-header">
+        <h1>Intro to CS Projects</h1>
+        <p>Projects from my Intro to Computer Science class.</p>
+    </header>
+    
+    <main class="content-container">
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Coming Soon</h3>
+                <p>Projects will be showcased here as they are completed.</p>
+            </div>
+        </div>
+    </main>
+    
+    <button id="backToTop" class="back-to-top" title="Go to top">↑</button>
+    
+    <script>
+        // Basic navigation functionality
+        document.querySelectorAll('a').forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').endsWith('.html')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.body.classList.add('fade-exit');
+                    setTimeout(() => {
+                        window.location.href = link.getAttribute('href');
+                    }, 350);
+                });
+            }
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
