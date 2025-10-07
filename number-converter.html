@@ -193,7 +193,7 @@
 </head>
 <body class="fade-enter">
     <nav class="navbar">
-        <div class="nav-logo">Asher</div>
+        <div class="nav-logo">Asher VerLee Portfolio</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li class="dropdown">
@@ -450,112 +450,7 @@
             setTimeout(() => document.body.classList.remove('fade-enter'), 400);
         });
 
-        // Easter Egg: Airstrike Mode
-        let clickCount = 0;
-        let clickTimer = null;
-        const navLogo = document.querySelector('.nav-logo');
-        
-        navLogo.addEventListener('click', function(e) {
-            e.preventDefault();
-            clickCount++;
-            
-            if (clickTimer) clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-            
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
-            
-            if (clickCount >= 5) {
-                activateAirstrike();
-                clickCount = 0;
-            }
-        });
-        
-        function activateAirstrike() {
-            const airstrikeOverlay = document.createElement('div');
-            airstrikeOverlay.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-                z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-                color: #ff0000; font-family: 'Courier New', monospace;
-                animation: airstrikeFlash 0.5s ease-in-out infinite alternate;
-            `;
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes airstrikeFlash {
-                    0% { background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%); }
-                    100% { background: radial-gradient(circle, rgba(255,100,0,0.5) 0%, rgba(50,0,0,0.9) 100%); }
-                }
-                @keyframes explosionShake {
-                    0%, 100% { transform: translate(0, 0); }
-                    10% { transform: translate(-2px, -1px); } 20% { transform: translate(2px, 1px); }
-                    30% { transform: translate(-1px, 2px); } 40% { transform: translate(1px, -2px); }
-                    50% { transform: translate(-2px, 1px); } 60% { transform: translate(2px, -1px); }
-                    70% { transform: translate(-1px, -2px); } 80% { transform: translate(1px, 2px); }
-                    90% { transform: translate(-2px, -1px); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            airstrikeOverlay.innerHTML = `
-                <div style="text-align: center; animation: explosionShake 0.3s ease-in-out infinite;">
-                    <h1 style="font-size: 4rem; margin: 0; text-shadow: 0 0 20px #ff0000;">⚠️ AIRSTRIKE INCOMING ⚠️</h1>
-                    <p style="font-size: 2rem; margin: 1rem 0; text-shadow: 0 0 10px #ff0000;">TARGET ACQUIRED</p>
-                    <div style="font-size: 1.5rem; margin: 2rem 0;">
-                        <div>🎯 COORDINATES: ${Math.floor(Math.random() * 90)}°N ${Math.floor(Math.random() * 180)}°W</div>
-                        <div style="margin-top: 1rem;">💥 ETA: <span id="countdown">5</span> SECONDS</div>
-                    </div>
-                    <button onclick="cancelAirstrike()" style="
-                        background: #ff0000; color: white; border: 2px solid #ffffff; padding: 1rem 2rem;
-                        font-size: 1.2rem; font-family: 'Courier New', monospace; cursor: pointer; border-radius: 5px;
-                        margin-top: 2rem; animation: explosionShake 0.2s ease-in-out infinite;
-                    ">ABORT MISSION</button>
-                </div>
-            `;
-            
-            document.body.appendChild(airstrikeOverlay);
-            
-            let countdown = 5;
-            const countdownElement = document.getElementById('countdown');
-            const countdownInterval = setInterval(() => {
-                countdown--;
-                if (countdownElement) countdownElement.textContent = countdown;
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    showExplosion(airstrikeOverlay);
-                }
-            }, 1000);
-            
-            window.cancelAirstrike = function() {
-                clearInterval(countdownInterval);
-                airstrikeOverlay.innerHTML = `
-                    <div style="text-align: center;">
-                        <h1 style="font-size: 3rem; margin: 0; color: #00ff00; text-shadow: 0 0 20px #00ff00;">✅ MISSION ABORTED</h1>
-                        <p style="font-size: 1.5rem; margin: 2rem 0; color: #00ff00;">Crisis averted. Good call, Commander.</p>
-                        <button onclick="document.body.removeChild(this.closest('div'))" style="
-                            background: #00ff00; color: black; border: none; padding: 1rem 2rem;
-                            font-size: 1rem; cursor: pointer; border-radius: 5px;
-                        ">Return to Base</button>
-                    </div>
-                `;
-            };
-        }
-        
-        function showExplosion(overlay) {
-            overlay.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="font-size: 8rem; animation: explosionShake 0.1s ease-in-out infinite;">💥💥💥</div>
-                    <h1 style="font-size: 3rem; margin: 1rem 0; color: #ffaa00; text-shadow: 0 0 30px #ff0000;">DIRECT HIT!</h1>
-                    <p style="font-size: 1.5rem; margin: 1rem 0;">Target eliminated with extreme prejudice.</p>
-                    <p style="font-size: 1rem; opacity: 0.8;">Just kidding! No websites were harmed in the making of this easter egg.</p>
-                    <button onclick="document.body.removeChild(this.closest('div'))" style="
-                        background: #356cc6; color: white; border: none; padding: 1rem 2rem;
-                        font-size: 1rem; cursor: pointer; border-radius: 5px; margin-top: 2rem;
-                    ">Return to Portfolio</button>
-                </div>
-            `;
-        }
+
     </script>
 </body>
 </html>
