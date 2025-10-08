@@ -10,7 +10,9 @@
 </head>
 <body class="fade-enter">
     <nav class="navbar">
-        <div class="nav-logo">Asher VerLee Portfolio</div>
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <div class="nav-logo">Asher VerLee Portfolio</div>
+        </a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="projects.html">Projects</a></li>
@@ -21,21 +23,14 @@
     <header class="banner project-banner" id="home">
         <h1 class="banner-title">My Projects</h1>
         <p class="banner-subtitle">A collection of my work across personal, academic, and NASA HUNCH initiatives</p>
-        <div class="project-stats">
-            <div class="stat-item">
-                <span class="stat-number">2024-25</span>
-                <span class="stat-label">Active Development</span>
-            </div>
-        </div>
     </header>
     
     <main>
         <!-- Quick Navigation -->
         <section class="section-nav">
             <a href="#personal" class="section-nav-btn">Personal</a>
-            <a href="#school" class="section-nav-btn">School</a>
+            <a href="#school" class="section-nav-btn">School & Intro to CS</a>
             <a href="#hunch" class="section-nav-btn">HUNCH</a>
-            <a href="#intro-cs" class="section-nav-btn">Intro to CS</a>
         </section>
 
         <!-- PERSONAL PROJECTS SECTION -->
@@ -140,29 +135,87 @@
             </div>
         </section>
 
-        <!-- SCHOOL PROJECTS SECTION -->
+        <!-- SCHOOL & INTRO TO CS PROJECTS SECTION -->
         <section id="school" class="project-section">
             <div class="section-header">
-                <h2>School Projects</h2>
-                <p>Academic coursework and classroom assignments</p>
+                <h2>School & Intro to CS Projects</h2>
+                <p>Academic coursework and Introduction to Computer Science projects</p>
             </div>
             
             <div class="projects-grid">
-                <!-- Coming Soon Card -->
+                <!-- Code Library -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="https://via.placeholder.com/400x250/14213D/FCA311?text=Code+Library" alt="Code Library" class="project-image" 
+                             style="object-fit: cover; object-position: center;">
+                        <span class="status-overlay status-complete">Completed</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>HTML & CSS Code Library</h3>
+                            <span class="project-date">2025</span>
+                        </div>
+                        <p>Comprehensive reference guide with all HTML tags and CSS properties learned in Intro to CS.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>📚 Reference Guide</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="code-library.html" class="project-link">
+                                View Library →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Number Base Converter -->
+                <div class="project-card">
+                    <div class="project-image-container">
+                        <img src="images/number converter.png" alt="Number Converter" class="project-image" 
+                             style="object-fit: cover; object-position: center;">
+                        <span class="status-overlay status-complete">Completed</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Number Base Converter</h3>
+                            <span class="project-date">2025</span>
+                        </div>
+                        <p>Web-based tool for converting between different number systems (binary, hex, decimal).</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JavaScript</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>~300 lines</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="number-converter.html" class="project-link">
+                                View Project →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Card for additional school projects -->
                 <div class="project-card coming-soon-card">
                     <div class="project-image-container coming-soon-bg">
                         <span class="status-overlay status-upcoming">Coming Soon</span>
                         <div class="coming-soon-content">
-                            <h3>School Projects</h3>
+                            <h3>More Projects</h3>
                             <p>📚</p>
                         </div>
                     </div>
                     <div class="project-content">
                         <div class="project-header">
-                            <h3>School Projects</h3>
+                            <h3>Additional School Projects</h3>
                             <span class="project-date">2025</span>
                         </div>
-                        <p>Academic projects and coursework will be added here soon!</p>
+                        <p>More academic projects and coursework will be added here soon!</p>
                     </div>
                 </div>
             </div>
@@ -196,44 +249,6 @@
             </div>
         </section>
 
-        <!-- INTRO TO CS PROJECTS SECTION -->
-        <section id="intro-cs" class="project-section">
-            <div class="section-header">
-                <h2>Intro to CS Projects</h2>
-                <p>Projects from Introduction to Computer Science course</p>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- Number Base Converter -->
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="images/number converter.png" alt="Number Converter" class="project-image" 
-                             style="object-fit: cover; object-position: center;">
-                        <span class="status-overlay status-complete">Completed</span>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3>Number Base Converter</h3>
-                            <span class="project-date">2025</span>
-                        </div>
-                        <p>Web-based tool for converting between different number systems (binary, hex, decimal).</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">HTML</span>
-                            <span class="tech-badge">CSS</span>
-                            <span class="tech-badge">JavaScript</span>
-                        </div>
-                        <div class="project-meta">
-                            <span>~300 lines</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="number-converter.html" class="project-link">
-                                View Project →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Back to Top Button -->

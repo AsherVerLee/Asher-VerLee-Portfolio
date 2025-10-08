@@ -96,22 +96,7 @@ hr {
     background-clip: text;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
-    position: relative;
-}
-
-.nav-logo::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #FCA311;
-    transition: width 0.3s ease;
-}
-
-.nav-logo:hover::after {
-    width: 100%;
+    cursor: pointer;
 }
 
 .nav-links {

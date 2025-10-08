@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Library - HTML & CSS Reference</title>
+    <link rel="icon" type="image/svg+xml" href="images/Windows 11 Folder Icon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+    <style>
+        .library-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .library-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .library-header h1 {
+            font-size: 2.5rem;
+            color: #14213D;
+            margin-bottom: 0.5rem;
+        }
+
+        .library-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 3rem;
+            background: #F5F5F5;
+            border-radius: 12px;
+            padding: 0.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: #14213D;
+            background: rgba(252, 163, 17, 0.1);
+        }
+
+        .tab-btn.active {
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #FCA311 0%, #FF8C00 100%);
+            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tag-card {
+            background: #FFFFFF;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag-card:hover {
+            border-color: #FCA311;
+            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.1);
+        }
+
+        .tag-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #14213D;
+            margin-bottom: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tag-purpose {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .tag-example {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #FCA311;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+        }
+
+        .tag-example code {
+            color: #14213D;
+        }
+
+        .section-divider {
+            margin: 3rem 0;
+            text-align: center;
+            color: #14213D;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #14213D;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #FCA311;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            padding: 1rem;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #FCA311;
+        }
+    </style>
+</head>
+<body class="fade-enter">
+    <nav class="navbar">
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <div class="nav-logo">Asher VerLee Portfolio</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="index.html#about">About/Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="library-container">
+        <a href="projects.html#school" class="back-link">← Back to Projects</a>
+        
+        <div class="library-header">
+            <h1>Code Library</h1>
+            <p>HTML & CSS Reference Guide for Intro to CS</p>
+        </div>
+
+        <input type="text" id="searchBox" class="search-box" placeholder="Search tags and properties...">
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('html')">HTML Tags</button>
+            <button class="tab-btn" onclick="switchTab('css')">CSS Properties</button>
+        </div>
+
+        <!-- HTML TAB -->
+        <div id="html-tab" class="tab-content active">
+            
+            <!-- Document Structure -->
+            <div class="section-divider">Document Structure</div>
+<!-- praise the lord for autofill copilot, jeez-->
+            <div class="tag-card">
+                <div class="tag-name">&lt;!DOCTYPE html&gt;</div>
+                <div class="tag-purpose">Declares the document type and HTML version. Must be the first line of your HTML file.</div>
+                <div class="tag-example"><code>&lt;!DOCTYPE html&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;html&gt;</div>
+                <div class="tag-purpose">Root element that contains all other HTML elements on the page.</div>
+                <div class="tag-example"><code>&lt;html lang="en"&gt;<br>&nbsp;&nbsp;&lt;!-- All content goes here --&gt;<br>&lt;/html&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;head&gt;</div>
+                <div class="tag-purpose">Contains metadata about the document, like title, character set, and links to stylesheets.</div>
+                <div class="tag-example"><code>&lt;head&gt;<br>&nbsp;&nbsp;&lt;title&gt;My Page&lt;/title&gt;<br>&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>&lt;/head&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;body&gt;</div>
+                <div class="tag-purpose">Contains all visible content on the webpage (text, images, links, etc.).</div>
+                <div class="tag-example"><code>&lt;body&gt;<br>&nbsp;&nbsp;&lt;h1&gt;Welcome!&lt;/h1&gt;<br>&nbsp;&nbsp;&lt;p&gt;This is my page.&lt;/p&gt;<br>&lt;/body&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;title&gt;</div>
+                <div class="tag-purpose">Defines the title shown in the browser tab. Goes inside the &lt;head&gt; section.</div>
+                <div class="tag-example"><code>&lt;title&gt;My Portfolio Website&lt;/title&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;meta&gt;</div>
+                <div class="tag-purpose">Provides metadata about the HTML document (character set, viewport settings, description).</div>
+                <div class="tag-example"><code>&lt;meta charset="UTF-8"&gt;<br>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>&lt;meta name="description" content="My portfolio"&gt;</code></div>
+            </div>
+
+            <!-- Text Formatting -->
+            <div class="section-divider">Text & Headings</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;h1&gt; - &lt;h6&gt;</div>
+                <div class="tag-purpose">Heading tags from largest (h1) to smallest (h6). Used to structure content hierarchy.</div>
+                <div class="tag-example"><code>&lt;h1&gt;Main Title&lt;/h1&gt;<br>&lt;h2&gt;Subtitle&lt;/h2&gt;<br>&lt;h3&gt;Section Heading&lt;/h3&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;p&gt;</div>
+                <div class="tag-purpose">Defines a paragraph of text. Automatically adds spacing before and after.</div>
+                <div class="tag-example"><code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;strong&gt;</div>
+                <div class="tag-purpose">Makes text bold and indicates strong importance.</div>
+                <div class="tag-example"><code>&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt; text.&lt;/p&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;em&gt;</div>
+                <div class="tag-purpose">Emphasizes text with italics.</div>
+                <div class="tag-example"><code>&lt;p&gt;This is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;br&gt;</div>
+                <div class="tag-purpose">Creates a line break. Self-closing tag (no closing tag needed).</div>
+                <div class="tag-example"><code>First line&lt;br&gt;Second line</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;hr&gt;</div>
+                <div class="tag-purpose">Creates a horizontal rule (line) to separate content. Self-closing tag.</div>
+                <div class="tag-example"><code>Section 1&lt;hr&gt;Section 2</code></div>
+            </div>
+
+            <!-- Links & Navigation -->
+            <div class="section-divider">Links & Navigation</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;a&gt;</div>
+                <div class="tag-purpose">Creates a hyperlink to another page or location. Uses href attribute for destination.</div>
+                <div class="tag-example"><code>&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;<br>&lt;a href="page2.html"&gt;Go to Page 2&lt;/a&gt;<br>&lt;a href="#section"&gt;Jump to Section&lt;/a&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;nav&gt;</div>
+                <div class="tag-purpose">Defines a navigation section containing links to other pages or sections.</div>
+                <div class="tag-example"><code>&lt;nav&gt;<br>&nbsp;&nbsp;&lt;a href="home.html"&gt;Home&lt;/a&gt;<br>&nbsp;&nbsp;&lt;a href="about.html"&gt;About&lt;/a&gt;<br>&lt;/nav&gt;</code></div>
+            </div>
+
+            <!-- Images & Media -->
+            <div class="section-divider">Images & Media</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;img&gt;</div>
+                <div class="tag-purpose">Embeds an image. Requires src (source) and alt (description) attributes. Self-closing.</div>
+                <div class="tag-example"><code>&lt;img src="photo.jpg" alt="Description of image"&gt;<br>&lt;img src="images/logo.png" alt="Company logo" width="200"&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;video&gt;</div>
+                <div class="tag-purpose">Embeds a video player. Can include controls, autoplay, and loop attributes.</div>
+                <div class="tag-example"><code>&lt;video width="640" height="360" controls&gt;<br>&nbsp;&nbsp;&lt;source src="video.mp4" type="video/mp4"&gt;<br>&lt;/video&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;audio&gt;</div>
+                <div class="tag-purpose">Embeds an audio player.</div>
+                <div class="tag-example"><code>&lt;audio controls&gt;<br>&nbsp;&nbsp;&lt;source src="song.mp3" type="audio/mpeg"&gt;<br>&lt;/audio&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;iframe&gt;</div>
+                <div class="tag-purpose">Embeds another webpage or content (like YouTube videos) within your page.</div>
+                <div class="tag-example"><code>&lt;iframe src="https://example.com" width="600" height="400"&gt;&lt;/iframe&gt;</code></div>
+            </div>
+
+            <!-- Lists -->
+            <div class="section-divider">Lists</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;ul&gt;</div>
+                <div class="tag-purpose">Creates an unordered (bulleted) list.</div>
+                <div class="tag-example"><code>&lt;ul&gt;<br>&nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>&nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>&lt;/ul&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;ol&gt;</div>
+                <div class="tag-purpose">Creates an ordered (numbered) list.</div>
+                <div class="tag-example"><code>&lt;ol&gt;<br>&nbsp;&nbsp;&lt;li&gt;Step 1&lt;/li&gt;<br>&nbsp;&nbsp;&lt;li&gt;Step 2&lt;/li&gt;<br>&lt;/ol&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;li&gt;</div>
+                <div class="tag-purpose">Defines a list item within &lt;ul&gt; or &lt;ol&gt;.</div>
+                <div class="tag-example"><code>&lt;ul&gt;<br>&nbsp;&nbsp;&lt;li&gt;Item&lt;/li&gt;<br>&lt;/ul&gt;</code></div>
+            </div>
+
+            <!-- Containers & Layout -->
+            <div class="section-divider">Containers & Layout</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;div&gt;</div>
+                <div class="tag-purpose">Generic container for grouping content. Used with CSS for layout and styling.</div>
+                <div class="tag-example"><code>&lt;div class="container"&gt;<br>&nbsp;&nbsp;&lt;h2&gt;Section Title&lt;/h2&gt;<br>&nbsp;&nbsp;&lt;p&gt;Content here&lt;/p&gt;<br>&lt;/div&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;span&gt;</div>
+                <div class="tag-purpose">Inline container for styling small portions of text or content.</div>
+                <div class="tag-example"><code>&lt;p&gt;This is &lt;span class="highlight"&gt;highlighted&lt;/span&gt; text.&lt;/p&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;header&gt;</div>
+                <div class="tag-purpose">Defines the header section of a page or section, typically containing navigation or titles.</div>
+                <div class="tag-example"><code>&lt;header&gt;<br>&nbsp;&nbsp;&lt;h1&gt;My Website&lt;/h1&gt;<br>&nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;<br>&lt;/header&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;main&gt;</div>
+                <div class="tag-purpose">Contains the main content of the webpage. Should only be used once per page.</div>
+                <div class="tag-example"><code>&lt;main&gt;<br>&nbsp;&nbsp;&lt;h2&gt;Main Content&lt;/h2&gt;<br>&nbsp;&nbsp;&lt;p&gt;Page content here&lt;/p&gt;<br>&lt;/main&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;footer&gt;</div>
+                <div class="tag-purpose">Defines the footer section, typically containing copyright, contact info, or links.</div>
+                <div class="tag-example"><code>&lt;footer&gt;<br>&nbsp;&nbsp;&lt;p&gt;&copy; 2025 My Website&lt;/p&gt;<br>&lt;/footer&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;section&gt;</div>
+                <div class="tag-purpose">Defines a thematic grouping of content, typically with its own heading.</div>
+                <div class="tag-example"><code>&lt;section&gt;<br>&nbsp;&nbsp;&lt;h2&gt;About Me&lt;/h2&gt;<br>&nbsp;&nbsp;&lt;p&gt;Information...&lt;/p&gt;<br>&lt;/section&gt;</code></div>
+            </div>
+
+            <!-- Forms & Input -->
+            <div class="section-divider">Forms & Input</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;form&gt;</div>
+                <div class="tag-purpose">Creates a form for user input. Contains input fields, buttons, etc.</div>
+                <div class="tag-example"><code>&lt;form action="/submit" method="POST"&gt;<br>&nbsp;&nbsp;&lt;input type="text" name="username"&gt;<br>&nbsp;&nbsp;&lt;button type="submit"&gt;Submit&lt;/button&gt;<br>&lt;/form&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;input&gt;</div>
+                <div class="tag-purpose">Creates an input field. Type attribute determines the kind of input (text, email, password, etc.).</div>
+                <div class="tag-example"><code>&lt;input type="text" placeholder="Enter name"&gt;<br>&lt;input type="email" required&gt;<br>&lt;input type="password"&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;button&gt;</div>
+                <div class="tag-purpose">Creates a clickable button.</div>
+                <div class="tag-example"><code>&lt;button type="button"&gt;Click Me&lt;/button&gt;<br>&lt;button type="submit"&gt;Submit Form&lt;/button&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;label&gt;</div>
+                <div class="tag-purpose">Defines a label for an input element. Improves accessibility.</div>
+                <div class="tag-example"><code>&lt;label for="username"&gt;Username:&lt;/label&gt;<br>&lt;input type="text" id="username"&gt;</code></div>
+            </div>
+
+            <!-- Tables -->
+            <div class="section-divider">Tables</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;table&gt;</div>
+                <div class="tag-purpose">Creates a table to display data in rows and columns.</div>
+                <div class="tag-example"><code>&lt;table&gt;<br>&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Name&lt;/th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Age&lt;/th&gt;<br>&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;John&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;25&lt;/td&gt;<br>&nbsp;&nbsp;&lt;/tr&gt;<br>&lt;/table&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;tr&gt;</div>
+                <div class="tag-purpose">Defines a table row.</div>
+                <div class="tag-example"><code>&lt;tr&gt;<br>&nbsp;&nbsp;&lt;td&gt;Cell 1&lt;/td&gt;<br>&nbsp;&nbsp;&lt;td&gt;Cell 2&lt;/td&gt;<br>&lt;/tr&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;th&gt;</div>
+                <div class="tag-purpose">Defines a table header cell (bold and centered by default).</div>
+                <div class="tag-example"><code>&lt;tr&gt;<br>&nbsp;&nbsp;&lt;th&gt;Header 1&lt;/th&gt;<br>&nbsp;&nbsp;&lt;th&gt;Header 2&lt;/th&gt;<br>&lt;/tr&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;td&gt;</div>
+                <div class="tag-purpose">Defines a table data cell.</div>
+                <div class="tag-example"><code>&lt;tr&gt;<br>&nbsp;&nbsp;&lt;td&gt;Data 1&lt;/td&gt;<br>&nbsp;&nbsp;&lt;td&gt;Data 2&lt;/td&gt;<br>&lt;/tr&gt;</code></div>
+            </div>
+
+            <!-- Styling & Scripts -->
+            <div class="section-divider">Styling & Scripts</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;link&gt;</div>
+                <div class="tag-purpose">Links external resources like CSS stylesheets. Goes in &lt;head&gt; section.</div>
+                <div class="tag-example"><code>&lt;link rel="stylesheet" href="style.css"&gt;<br>&lt;link rel="icon" href="favicon.ico"&gt;<br>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;style&gt;</div>
+                <div class="tag-purpose">Contains internal CSS styles within the HTML document.</div>
+                <div class="tag-example"><code>&lt;style&gt;<br>&nbsp;&nbsp;body { background-color: blue; }<br>&nbsp;&nbsp;h1 { color: white; }<br>&lt;/style&gt;</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;script&gt;</div>
+                <div class="tag-purpose">Embeds or links JavaScript code. Can go in &lt;head&gt; or end of &lt;body&gt;.</div>
+                <div class="tag-example"><code>&lt;script src="script.js"&gt;&lt;/script&gt;<br>&lt;script&gt;<br>&nbsp;&nbsp;console.log("Hello!");<br>&lt;/script&gt;</code></div>
+            </div>
+
+            <!-- Special Characters & Entities -->
+            <div class="section-divider">Special Characters</div>
+
+            <div class="tag-card">
+                <div class="tag-name">HTML Entities</div>
+                <div class="tag-purpose">Special codes for characters that have special meaning in HTML or aren't on the keyboard.</div>
+                <div class="tag-example"><code>&amp;lt; = &lt; (less than)<br>&amp;gt; = &gt; (greater than)<br>&amp;amp; = &amp; (ampersand)<br>&amp;nbsp; = non-breaking space<br>&amp;copy; = © (copyright)<br>&amp;hearts; = ♥ (heart)<br>&amp;#8594; = → (arrow)</code></div>
+            </div>
+
+            <!-- Comments -->
+            <div class="section-divider">Comments</div>
+
+            <div class="tag-card">
+                <div class="tag-name">&lt;!-- comment --&gt;</div>
+                <div class="tag-purpose">Creates a comment that won't be displayed on the page. Useful for notes and documentation.</div>
+                <div class="tag-example"><code>&lt;!-- This is a comment --&gt;<br>&lt;!-- TODO: Add more content here --&gt;<br>&lt;!-- Temporary: Will remove later --&gt;</code></div>
+            </div>
+
+        </div>
+
+        <!-- CSS TAB -->
+        <div id="css-tab" class="tab-content">
+            
+            <!-- Text Properties -->
+            <div class="section-divider">Text Properties</div>
+
+            <div class="tag-card">
+                <div class="tag-name">color</div>
+                <div class="tag-purpose">Sets the text color. Can use color names, hex codes, or RGB values.</div>
+                <div class="tag-example"><code>h1 { color: blue; }<br>p { color: #FF0000; }<br>span { color: rgb(0, 255, 0); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">font-family</div>
+                <div class="tag-purpose">Specifies the font for text. Provide fallback fonts in case the first isn't available.</div>
+                <div class="tag-example"><code>body { font-family: Arial, sans-serif; }<br>h1 { font-family: 'Times New Roman', serif; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">font-size</div>
+                <div class="tag-purpose">Sets the size of text. Can use px, em, rem, or %.</div>
+                <div class="tag-example"><code>h1 { font-size: 32px; }<br>p { font-size: 1.2em; }<br>small { font-size: 80%; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">font-weight</div>
+                <div class="tag-purpose">Controls the boldness of text. Values: normal, bold, or numbers (100-900).</div>
+                <div class="tag-example"><code>h1 { font-weight: bold; }<br>p { font-weight: 400; }<br>strong { font-weight: 700; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">font-style</div>
+                <div class="tag-purpose">Makes text italic or normal.</div>
+                <div class="tag-example"><code>em { font-style: italic; }<br>p { font-style: normal; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">text-align</div>
+                <div class="tag-purpose">Aligns text horizontally: left, right, center, or justify.</div>
+                <div class="tag-example"><code>h1 { text-align: center; }<br>p { text-align: left; }<br>.footer { text-align: right; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">text-decoration</div>
+                <div class="tag-purpose">Adds decorations to text: underline, line-through, or none.</div>
+                <div class="tag-example"><code>a { text-decoration: none; }<br>.strike { text-decoration: line-through; }<br>.underline { text-decoration: underline; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">text-transform</div>
+                <div class="tag-purpose">Controls capitalization: uppercase, lowercase, or capitalize.</div>
+                <div class="tag-example"><code>h1 { text-transform: uppercase; }<br>.title { text-transform: capitalize; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">line-height</div>
+                <div class="tag-purpose">Sets the spacing between lines of text.</div>
+                <div class="tag-example"><code>p { line-height: 1.6; }<br>h1 { line-height: 1.2; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">letter-spacing</div>
+                <div class="tag-purpose">Adjusts spacing between characters.</div>
+                <div class="tag-example"><code>h1 { letter-spacing: 2px; }<br>.spaced { letter-spacing: 0.1em; }</code></div>
+            </div>
+
+            <!-- Colors & Backgrounds -->
+            <div class="section-divider">Colors & Backgrounds</div>
+
+            <div class="tag-card">
+                <div class="tag-name">background-color</div>
+                <div class="tag-purpose">Sets the background color of an element.</div>
+                <div class="tag-example"><code>body { background-color: #f0f0f0; }<br>.box { background-color: lightblue; }<br>header { background-color: rgb(20, 33, 61); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">background-image</div>
+                <div class="tag-purpose">Sets an image as the background.</div>
+                <div class="tag-example"><code>body { background-image: url('background.jpg'); }<br>.hero { background-image: url('images/banner.png'); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">background-size</div>
+                <div class="tag-purpose">Controls the size of background image: cover, contain, or specific dimensions.</div>
+                <div class="tag-example"><code>.hero { background-size: cover; }<br>.banner { background-size: contain; }<br>.box { background-size: 100px 200px; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">background-position</div>
+                <div class="tag-purpose">Positions the background image.</div>
+                <div class="tag-example"><code>.hero { background-position: center; }<br>.banner { background-position: top right; }<br>.box { background-position: 50% 20%; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">background-repeat</div>
+                <div class="tag-purpose">Controls if/how background image repeats: repeat, no-repeat, repeat-x, repeat-y.</div>
+                <div class="tag-example"><code>.pattern { background-repeat: repeat; }<br>.banner { background-repeat: no-repeat; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">opacity</div>
+                <div class="tag-purpose">Sets transparency level from 0 (invisible) to 1 (fully visible).</div>
+                <div class="tag-example"><code>.fade { opacity: 0.5; }<br>.hidden { opacity: 0; }<br>.visible { opacity: 1; }</code></div>
+            </div>
+
+            <!-- Box Model -->
+            <div class="section-divider">Box Model (Spacing)</div>
+
+            <div class="tag-card">
+                <div class="tag-name">width</div>
+                <div class="tag-purpose">Sets the width of an element.</div>
+                <div class="tag-example"><code>.container { width: 800px; }<br>.box { width: 50%; }<br>img { width: 100%; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">height</div>
+                <div class="tag-purpose">Sets the height of an element.</div>
+                <div class="tag-example"><code>.banner { height: 400px; }<br>.box { height: 100vh; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">padding</div>
+                <div class="tag-purpose">Space inside an element, between content and border. Can set all sides or individually.</div>
+                <div class="tag-example"><code>.box { padding: 20px; }<br>.card { padding: 10px 20px; }<br>.container { padding-top: 30px; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">margin</div>
+                <div class="tag-purpose">Space outside an element, between it and other elements.</div>
+                <div class="tag-example"><code>h1 { margin: 20px; }<br>p { margin: 10px 0; }<br>.centered { margin: 0 auto; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">border</div>
+                <div class="tag-purpose">Creates a border around an element. Specify width, style, and color.</div>
+                <div class="tag-example"><code>.box { border: 2px solid black; }<br>.card { border: 1px dashed #ccc; }<br>img { border: 3px solid red; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">border-radius</div>
+                <div class="tag-purpose">Rounds the corners of an element.</div>
+                <div class="tag-example"><code>.button { border-radius: 5px; }<br>.circle { border-radius: 50%; }<br>.card { border-radius: 10px 10px 0 0; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">box-shadow</div>
+                <div class="tag-purpose">Adds a shadow effect around an element.</div>
+                <div class="tag-example"><code>.card { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }<br>.button { box-shadow: 2px 2px 5px gray; }</code></div>
+            </div>
+
+            <!-- Display & Layout -->
+            <div class="section-divider">Display & Layout</div>
+
+            <div class="tag-card">
+                <div class="tag-name">display</div>
+                <div class="tag-purpose">Controls how element is displayed: block, inline, inline-block, flex, grid, none.</div>
+                <div class="tag-example"><code>.hidden { display: none; }<br>.inline { display: inline; }<br>.flex-container { display: flex; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">position</div>
+                <div class="tag-purpose">Controls positioning method: static, relative, absolute, fixed, sticky.</div>
+                <div class="tag-example"><code>.navbar { position: fixed; }<br>.overlay { position: absolute; }<br>.card { position: relative; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">top / right / bottom / left</div>
+                <div class="tag-purpose">Positions element when using position: absolute, relative, or fixed.</div>
+                <div class="tag-example"><code>.navbar { top: 0; left: 0; }<br>.corner { top: 10px; right: 10px; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">float</div>
+                <div class="tag-purpose">Makes element float to left or right, allowing text to wrap around it.</div>
+                <div class="tag-example"><code>img { float: left; }<br>.sidebar { float: right; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">clear</div>
+                <div class="tag-purpose">Controls behavior around floated elements.</div>
+                <div class="tag-example"><code>.footer { clear: both; }<br>.section { clear: left; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">z-index</div>
+                <div class="tag-purpose">Controls stacking order of overlapping elements. Higher numbers = on top.</div>
+                <div class="tag-example"><code>.navbar { z-index: 100; }<br>.modal { z-index: 1000; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">overflow</div>
+                <div class="tag-purpose">Controls what happens when content is too big: visible, hidden, scroll, auto.</div>
+                <div class="tag-example"><code>.container { overflow: hidden; }<br>.scrollbox { overflow: scroll; }<br>.text { overflow: auto; }</code></div>
+            </div>
+
+            <!-- Flexbox -->
+            <div class="section-divider">Flexbox Properties</div>
+
+            <div class="tag-card">
+                <div class="tag-name">display: flex</div>
+                <div class="tag-purpose">Turns an element into a flex container, enabling flexbox layout for its children.</div>
+                <div class="tag-example"><code>.container { display: flex; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">justify-content</div>
+                <div class="tag-purpose">Aligns flex items horizontally: flex-start, center, flex-end, space-between, space-around.</div>
+                <div class="tag-example"><code>.container { justify-content: center; }<br>.nav { justify-content: space-between; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">align-items</div>
+                <div class="tag-purpose">Aligns flex items vertically: flex-start, center, flex-end, stretch.</div>
+                <div class="tag-example"><code>.container { align-items: center; }<br>.box { align-items: flex-start; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">flex-direction</div>
+                <div class="tag-purpose">Sets direction of flex items: row, column, row-reverse, column-reverse.</div>
+                <div class="tag-example"><code>.container { flex-direction: row; }<br>.vertical { flex-direction: column; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">gap</div>
+                <div class="tag-purpose">Sets spacing between flex or grid items.</div>
+                <div class="tag-example"><code>.container { gap: 20px; }<br>.grid { gap: 10px 20px; }</code></div>
+            </div>
+
+            <!-- Effects & Animation -->
+            <div class="section-divider">Effects & Transitions</div>
+
+            <div class="tag-card">
+                <div class="tag-name">transition</div>
+                <div class="tag-purpose">Creates smooth transitions when properties change. Specify property, duration, and timing.</div>
+                <div class="tag-example"><code>.button { transition: all 0.3s ease; }<br>a { transition: color 0.2s; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">transform</div>
+                <div class="tag-purpose">Applies transformations: rotate, scale, translate, skew.</div>
+                <div class="tag-example"><code>.rotate { transform: rotate(45deg); }<br>.grow { transform: scale(1.2); }<br>.move { transform: translateX(50px); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">cursor</div>
+                <div class="tag-purpose">Changes mouse cursor appearance: pointer, default, grab, text, etc.</div>
+                <div class="tag-example"><code>.button { cursor: pointer; }<br>.disabled { cursor: not-allowed; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">:hover</div>
+                <div class="tag-purpose">Pseudo-class that applies styles when user hovers over an element.</div>
+                <div class="tag-example"><code>button:hover { background-color: blue; }<br>a:hover { color: red; }</code></div>
+            </div>
+
+            <!-- Miscellaneous -->
+            <div class="section-divider">Other Useful Properties</div>
+
+            <div class="tag-card">
+                <div class="tag-name">list-style</div>
+                <div class="tag-purpose">Controls list marker style. Can remove bullets/numbers with 'none'.</div>
+                <div class="tag-example"><code>ul { list-style: none; }<br>ol { list-style: decimal; }<br>li { list-style-type: square; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">max-width / max-height</div>
+                <div class="tag-purpose">Sets maximum width or height. Useful for responsive design.</div>
+                <div class="tag-example"><code>.container { max-width: 1200px; }<br>img { max-width: 100%; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">min-width / min-height</div>
+                <div class="tag-purpose">Sets minimum width or height.</div>
+                <div class="tag-example"><code>.box { min-height: 400px; }<br>.sidebar { min-width: 250px; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">object-fit</div>
+                <div class="tag-purpose">Controls how images/videos fit in their container: cover, contain, fill.</div>
+                <div class="tag-example"><code>img { object-fit: cover; }<br>.logo { object-fit: contain; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">visibility</div>
+                <div class="tag-purpose">Shows or hides element while keeping its space: visible or hidden.</div>
+                <div class="tag-example"><code>.hidden { visibility: hidden; }<br>.visible { visibility: visible; }</code></div>
+            </div>
+
+            <!-- Advanced Effects -->
+            <div class="section-divider">Advanced Effects</div>
+
+            <div class="tag-card">
+                <div class="tag-name">backdrop-filter</div>
+                <div class="tag-purpose">Applies effects like blur to the area behind an element. Great for glass-morphism effects.</div>
+                <div class="tag-example"><code>.glass { backdrop-filter: blur(10px); }<br>.frosted { backdrop-filter: blur(5px) brightness(1.1); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">filter</div>
+                <div class="tag-purpose">Applies visual effects to an element: blur, brightness, contrast, grayscale, etc.</div>
+                <div class="tag-example"><code>img { filter: grayscale(100%); }<br>.bright { filter: brightness(1.5); }<br>.shadow { filter: drop-shadow(0 4px 8px black); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">animation</div>
+                <div class="tag-purpose">Applies keyframe animations to elements. More powerful than transitions.</div>
+                <div class="tag-example"><code>@keyframes fadeIn {<br>&nbsp;&nbsp;from { opacity: 0; }<br>&nbsp;&nbsp;to { opacity: 1; }<br>}<br><br>.fade { animation: fadeIn 1s ease; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">:active</div>
+                <div class="tag-purpose">Pseudo-class that applies styles when an element is being clicked/activated.</div>
+                <div class="tag-example"><code>button:active { transform: scale(0.95); }<br>.link:active { color: red; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">:focus</div>
+                <div class="tag-purpose">Pseudo-class that applies styles when an element has keyboard focus.</div>
+                <div class="tag-example"><code>input:focus { border-color: blue; }<br>button:focus { outline: 2px solid #FCA311; }</code></div>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="section-divider">CSS Grid Properties</div>
+
+            <div class="tag-card">
+                <div class="tag-name">display: grid</div>
+                <div class="tag-purpose">Turns an element into a grid container for 2D layouts.</div>
+                <div class="tag-example"><code>.container { display: grid; }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">grid-template-columns</div>
+                <div class="tag-purpose">Defines the column structure of the grid.</div>
+                <div class="tag-example"><code>.grid { grid-template-columns: 1fr 1fr 1fr; }<br>.layout { grid-template-columns: 200px auto 200px; }<br>.responsive { grid-template-columns: repeat(3, 1fr); }</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">grid-template-rows</div>
+                <div class="tag-purpose">Defines the row structure of the grid.</div>
+                <div class="tag-example"><code>.grid { grid-template-rows: 100px auto 50px; }<br>.equal { grid-template-rows: repeat(3, 1fr); }</code></div>
+            </div>
+
+            <!-- Responsive Design -->
+            <div class="section-divider">Responsive Design</div>
+
+            <div class="tag-card">
+                <div class="tag-name">@media</div>
+                <div class="tag-purpose">Creates responsive styles that apply only at certain screen sizes (media queries).</div>
+                <div class="tag-example"><code>@media (max-width: 768px) {<br>&nbsp;&nbsp;.container { flex-direction: column; }<br>}<br><br>@media (min-width: 1200px) {<br>&nbsp;&nbsp;.content { max-width: 1400px; }<br>}</code></div>
+            </div>
+
+            <div class="tag-card">
+                <div class="tag-name">viewport units (vw, vh)</div>
+                <div class="tag-purpose">Units relative to viewport size: vw (viewport width), vh (viewport height).</div>
+                <div class="tag-example"><code>.hero { height: 100vh; }<br>.full-width { width: 100vw; }<br>.half { width: 50vw; }</code></div>
+            </div>
+
+            <!-- Comments -->
+            <div class="section-divider">CSS Comments</div>
+
+            <div class="tag-card">
+                <div class="tag-name">/* comment */</div>
+                <div class="tag-purpose">Creates a comment in CSS that won't affect styling. Useful for notes and organization.</div>
+                <div class="tag-example"><code>/* Main navigation styles */<br>.nav { color: blue; }<br><br>/* TODO: Fix mobile layout */<br>/* Temporary solution below */</code></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <img src="Icons/Up Arrow Icon.png" alt="Back to top">
+    </button>
+
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Set active button
+            event.target.classList.add('active');
+        }
+
+        // Search functionality
+        const searchBox = document.getElementById('searchBox');
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const allCards = document.querySelectorAll('.tag-card');
+            
+            allCards.forEach(card => {
+                const tagName = card.querySelector('.tag-name').textContent.toLowerCase();
+                const purpose = card.querySelector('.tag-purpose').textContent.toLowerCase();
+                
+                if (tagName.includes(searchTerm) || purpose.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('fade-exit');
+            document.body.classList.add('fade-enter');
+            setTimeout(() => document.body.classList.remove('fade-enter'), 400);
+        });
+    </script>
+</body>
+</html>
